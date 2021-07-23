@@ -1,4 +1,4 @@
-ARG TAG_PHPMYADMIN=5.1-fpm
+ARG TAG_PHPMYADMIN=latest
 
 FROM phpmyadmin:${TAG_PHPMYADMIN}
 
