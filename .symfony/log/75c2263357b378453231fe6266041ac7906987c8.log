@@ -1,10 +1,17 @@
-{"level":"debug","source":"server","source":"PHP","time":"2021-07-25T23:39:55Z","message":"Reloading PHP versions"}
-{"level":"debug","source":"server","source":"PHP","time":"2021-07-25T23:39:55Z","message":"Using PHP version 7.4.21 (from default version in $PATH)"}
-{"level":"info","source":"server","source":"PHP","php":"7.4.21","path":"/usr/local/sbin/php-fpm","port":41785,"time":"2021-07-25T23:39:55Z","message":"listening"}
-{"level":"warn","source":"server","ip":"172.23.0.1","status":404,"method":"GET","scheme":"https","host":"127.0.0.1:8004","time":"2021-07-25T23:40:09Z","message":"/"}
-{"level":"info","source":"server","ip":"172.23.0.1","status":200,"method":"GET","scheme":"https","host":"127.0.0.1:8004","time":"2021-07-25T23:40:10Z","message":"/_wdt/e021c7"}
-{"level":"warn","source":"server","ip":"172.23.0.1","status":404,"method":"GET","scheme":"https","host":"127.0.0.1:8004","time":"2021-07-25T23:40:10Z","message":"/favicon.ico"}
-{"level":"info","source":"server","ip":"172.23.0.1","status":200,"method":"GET","scheme":"https","host":"127.0.0.1:8004","time":"2021-07-25T23:40:46Z","message":"/lucky/number"}
-{"level":"info","source":"server","ip":"172.23.0.1","status":200,"method":"GET","scheme":"https","host":"127.0.0.1:8004","time":"2021-07-25T23:40:46Z","message":"/_wdt/f5205e"}
-{"level":"warn","source":"server","ip":"172.23.0.1","status":404,"method":"GET","scheme":"https","host":"127.0.0.1:8004","time":"2021-07-25T23:41:01Z","message":"/"}
-{"level":"info","source":"server","ip":"172.23.0.1","status":200,"method":"GET","scheme":"https","host":"127.0.0.1:8004","time":"2021-07-25T23:41:01Z","message":"/_wdt/549fe1"}
+{"level":"debug","source":"server","source":"PHP","time":"2021-08-03T06:39:28Z","message":"Reloading PHP versions"}
+{"level":"debug","source":"server","source":"PHP","time":"2021-08-03T06:39:28Z","message":"Using PHP version 7.4.21 (from default version in $PATH)"}
+{"level":"info","source":"server","source":"PHP","php":"7.4.21","path":"/usr/local/sbin/php-fpm","port":38385,"time":"2021-08-03T06:39:28Z","message":"listening"}
+{"level":"info","source":"server","ip":"172.23.0.1","status":200,"method":"GET","scheme":"https","host":"127.0.0.1:8004","time":"2021-08-03T06:42:46Z","message":"/"}
+{"level":"info","source":"server","ip":"172.23.0.1","status":200,"method":"GET","scheme":"https","host":"127.0.0.1:8004","time":"2021-08-03T06:42:48Z","message":"/"}
+{"level":"info","source":"server","ip":"172.23.0.1","status":200,"method":"GET","scheme":"https","host":"127.0.0.1:8004","time":"2021-08-03T06:42:48Z","message":"/_wdt/c3e4b4"}
+{"level":"info","source":"server","ip":"172.23.0.1","status":302,"method":"GET","scheme":"https","host":"127.0.0.1:8004","time":"2021-08-03T06:42:50Z","message":"/logout"}
+{"level":"info","source":"server","ip":"172.23.0.1","status":302,"method":"GET","scheme":"https","host":"127.0.0.1:8004","time":"2021-08-03T06:42:50Z","message":"/"}
+{"level":"info","source":"server","ip":"172.23.0.1","status":200,"method":"GET","scheme":"https","host":"127.0.0.1:8004","time":"2021-08-03T06:42:50Z","message":"/login"}
+{"level":"info","source":"server","ip":"172.23.0.1","status":200,"method":"GET","scheme":"https","host":"127.0.0.1:8004","time":"2021-08-03T06:42:50Z","message":"/_wdt/10c72d"}
+{"level":"info","source":"server","ip":"172.23.0.1","status":200,"method":"GET","scheme":"https","host":"127.0.0.1:8004","time":"2021-08-03T06:42:53Z","message":"/register"}
+{"level":"info","source":"server","ip":"172.23.0.1","status":200,"method":"GET","scheme":"https","host":"127.0.0.1:8004","time":"2021-08-03T06:42:53Z","message":"/_wdt/cb7d69"}
+{"level":"info","source":"server","ip":"172.23.0.1","status":200,"method":"GET","scheme":"https","host":"127.0.0.1:8004","time":"2021-08-03T06:42:54Z","message":"/login"}
+{"level":"info","source":"server","ip":"172.23.0.1","status":200,"method":"GET","scheme":"https","host":"127.0.0.1:8004","time":"2021-08-03T06:42:55Z","message":"/_wdt/f2f469"}
+{"level":"info","source":"server","ip":"172.23.0.1","status":302,"method":"POST","scheme":"https","host":"127.0.0.1:8004","time":"2021-08-03T06:42:56Z","message":"/login"}
+{"level":"info","source":"server","ip":"172.23.0.1","status":200,"method":"GET","scheme":"https","host":"127.0.0.1:8004","time":"2021-08-03T06:42:56Z","message":"/"}
+{"level":"info","source":"server","ip":"172.23.0.1","status":200,"method":"GET","scheme":"https","host":"127.0.0.1:8004","time":"2021-08-03T06:42:56Z","message":"/_wdt/35c0d6"}
