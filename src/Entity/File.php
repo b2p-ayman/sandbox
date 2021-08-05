@@ -32,7 +32,7 @@ class File
      * @ORM\Column(type="text")
      * @Assert\NotBlank
      * @Assert\Length(min=10,
-     *     minMessage = "La déscription doit être au moins de {{ limit }} caractères",
+     *     minMessage = "La description doit être au moins de {{ limit }} caractères",
      *     )
      */
     private $description;

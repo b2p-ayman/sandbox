@@ -31,26 +31,6 @@ class FileController extends AbstractController
      */
     public function index( )
     {
-        //$sayHello = "hello from home page";
-        /*$files = [
-            [
-                "id" => 1,
-                "titre" => "first file",
-                "description" => "this is the description of the first file"
-            ],
-            [
-                "id" => 2,
-                "titre" => "second file",
-                "description" => "this is the description of the second file"
-            ],
-
-        ];*/
-        /*return $this->render('home.html.twig',[
-            "hello" => $sayHello
-        ]);*/
-
-        ///
-
         $files = $this->fileRepository->findAll();
 
         return $this->render('home.html.twig',[
@@ -61,7 +41,7 @@ class FileController extends AbstractController
     /**
      * @Route("/file/{id}", name="file_show")
      */
-    public function showFile(int $id)
+    public function showFile(int $id, Request $request)
     {
         $file = $this->fileRepository
             ->find($id);
@@ -87,7 +67,7 @@ class FileController extends AbstractController
             $entityManager->persist($file);
             $entityManager->flush();
 
-            $this->flashMessage->add("success","File added !");
+            $this->flashMessage->add("success","Fichier ajouté !");
             return $this->redirectToRoute('file_list');
         }
 
@@ -101,8 +81,6 @@ class FileController extends AbstractController
      */
     public function modifyFile(File $file, Request $request) : Response
     {
-        //$file = $this->fileRepository->find($id);
-
         $form = $this->createForm(FileType::class, $file);
         $form->handleRequest($request);
 
@@ -112,7 +90,7 @@ class FileController extends AbstractController
             $entityManager->persist($file);
             $entityManager->flush();
 
-            $this->flashMessage->add("success","File edited !");
+            $this->flashMessage->add("success","Fichier modifié !");
             return $this->redirectToRoute('file_list');
         }
 
@@ -133,7 +111,7 @@ class FileController extends AbstractController
         $entityManager->remove($file);
         $entityManager->flush();
 
-        $this->flashMessage->add("success","File deleted !");
+        $this->flashMessage->add("success","Fichier supprimé !");
         return $this->redirectToRoute('file_list');
     }
 
