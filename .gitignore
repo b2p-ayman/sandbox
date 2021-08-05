@@ -11,4 +11,6 @@
 /public/bundles/
 /var/
 /vendor/
+/.symfony/
+/.composer/
 ###< symfony/framework-bundle ###

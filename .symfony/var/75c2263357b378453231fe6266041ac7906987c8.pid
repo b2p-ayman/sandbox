@@ -1,9 +1,0 @@
-{
-    "dir": "/var/www",
-    "watch": null,
-    "pid": 34,
-    "port": 8000,
-    "scheme": "http",
-    "args": null,
-    "name": "Web Server"
-}

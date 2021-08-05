@@ -1,0 +1,25 @@
+
+{% extends "base.html.twig" %}
+
+{% block title %}{{ myFile.titre }}{% endblock %}
+
+
+{% block body %}
+    <div class="row my-5">
+        <div class="col-md-8 mx-auto">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        {{ myFile.titre }}
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <div class="card-text">
+                        {{ myFile.description }}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
