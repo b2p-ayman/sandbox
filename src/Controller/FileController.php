@@ -41,7 +41,7 @@ class FileController extends AbstractController
     /**
      * @Route("/file/{id}", name="file_show")
      */
-    public function showFile(int $id, Request $request)
+    public function showFile(int $id)
     {
         $file = $this->fileRepository
             ->find($id);
