@@ -57,12 +57,14 @@ class FileController extends AbstractController
     public function createFile(Request $request) : Response
     {
         $file = new File();
-
+        //dd($this->getUser());
         $form = $this->createForm(FileType::class, $file);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
             $file = $form->getData();
+            $user = $this->getUser();
+            $file->setUser($user);
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($file);
             $entityManager->flush();

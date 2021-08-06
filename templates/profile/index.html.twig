@@ -1,0 +1,61 @@
+
+{% extends "base.html.twig" %}
+
+{% block title %}{{ user.username }}{% endblock %}
+
+
+{% block body %}
+    <div class="row my-5">
+        <div class="col-md-8 mx-auto">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        Mes documents
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <div class="card-text d-flex justify-content-center p-2">
+                        <img src="https://us.123rf.com/450wm/thesomeday123/thesomeday1231712/thesomeday123171200009/91087331-ic%C3%B4ne-de-profil-d-avatar-par-d%C3%A9faut-pour-le-m%C3%A2le-espace-r%C3%A9serv%C3%A9-photo-gris-vecteur-d-illustrations.jpg"
+                            width="150" height="150"
+                             class="img-fluid rounded-circle" alt="{{ user.username }}" >
+                    </div>
+                </div>
+                <div class="p-2">
+
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Titre</th>
+                            <th>Description</th>
+                            <th>Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for file in user.files %}
+                            <tr>
+                                <td scope="row">{{ file.id }}</td>
+                                <td>{{ file.titre }}</td>
+                                <td>{{ file.description }}</td>
+                                <td>
+                                    <a href="{{ path('file_show',{id:file.id}) }}" class="btn btn-sm btn-primary">
+                                        <i class="fa fa-eye"></i>
+                                    </a>
+                                    <a href="{{ path('file_edit',{id:file.id}) }}" class="btn btn-sm btn-warning">
+                                        <i class="fa fa-edit"></i>
+                                    </a>
+                                    <a href="{{ path('file_delete',{id:file.id}) }}" class="btn btn-sm btn-danger">
+                                        <i class="fa fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
