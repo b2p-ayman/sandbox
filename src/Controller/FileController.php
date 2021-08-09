@@ -57,7 +57,6 @@ class FileController extends AbstractController
     public function createFile(Request $request) : Response
     {
         $file = new File();
-        //dd($this->getUser());
         $form = $this->createForm(FileType::class, $file);
         $form->handleRequest($request);
 
