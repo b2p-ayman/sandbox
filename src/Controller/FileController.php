@@ -13,6 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Knp\Component\Pager\PaginatorInterface;
 
 class FileController extends AbstractController
 {
@@ -29,9 +30,16 @@ class FileController extends AbstractController
      * @Route("/", name="file_list")
      * @IsGranted("ROLE_USER")
      */
-    public function index( )
+    public function index(Request $request, PaginatorInterface $paginator)
     {
         $files = $this->fileRepository->findAll();
+
+        //// La pagination
+        $files = $paginator->paginate(
+            $files, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            5/*limit per page*/
+        );
 
         return $this->render('home.html.twig',[
             "myFiles" => $files

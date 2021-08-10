@@ -32,7 +32,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        {% for file in user.files %}
+                        {% for file in userFiles %}
                             <tr>
                                 <td scope="row">{{ file.id }}</td>
                                 <td>{{ file.titre }}</td>
@@ -53,6 +53,11 @@
                         </tbody>
 
                     </table>
+
+                    <div class="d-flex justify-content-center">
+                        {{ knp_pagination_render(userFiles) }}
+                    </div>
+
                 </div>
             </div>
 
