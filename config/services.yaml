@@ -25,3 +25,6 @@ services:
     # please note that last definitions always *replace* previous ones
     App\Controller\LuckyController: ~
 
+    App\Service\FileUploader:
+        arguments:
+            $targetDirectory: '%kernel.project_dir%/public/uploads/brochures'
