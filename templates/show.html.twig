@@ -17,6 +17,11 @@
                     <div class="card-text">
                         {{ myFile.description }}
                     </div>
+                    <div class="card-text">
+                        {% if myFile.brochureFilename %}
+                            <a class="btn btn-primary stretched-link" href="{{ asset('uploads/brochures/' ~ myFile.brochureFilename) }}">Consulter le fichier PDF</a>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
 

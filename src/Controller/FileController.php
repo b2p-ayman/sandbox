@@ -7,6 +7,7 @@ namespace App\Controller;
 use App\Entity\File;
 use App\Form\Type\FileType;
 use App\Repository\FileRepository;
+use App\Service\FileUploader;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -62,13 +63,21 @@ class FileController extends AbstractController
     /**
      * @Route("/create/file", name="file_create")
      */
-    public function createFile(Request $request) : Response
+    public function createFile(Request $request, FileUploader $fileUploader) : Response
     {
         $file = new File();
         $form = $this->createForm(FileType::class, $file);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
+
+            /** @var UploadedFile $brochureFile */
+            $brochureFile = $form->get('brochure')->getData();
+            if ($brochureFile) {
+                $brochureFileName = $fileUploader->upload($brochureFile);
+                $file->setBrochureFilename($brochureFileName);
+            }
+
             $file = $form->getData();
             $user = $this->getUser();
             $file->setUser($user);
