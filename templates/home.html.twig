@@ -19,6 +19,7 @@
                         <th>ID</th>
                         <th>Titre</th>
                         <th>Description</th>
+                        <th>Ajouté par</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -28,6 +29,7 @@
                             <td scope="row">{{ file.id }}</td>
                             <td>{{ file.titre }}</td>
                             <td>{{ file.description }}</td>
+                            <td>{{ file.user.username }}</td>
                             <td>
                                 <a href="{{ path('file_show',{id:file.id}) }}" class="btn btn-sm btn-primary">
                                     <i class="fa fa-eye"></i>
