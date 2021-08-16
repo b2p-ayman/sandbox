@@ -21,6 +21,7 @@
                         <th>Description</th>
                         <th>Ajouté par</th>
                         <th>Actions</th>
+                        <th>Décision</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -34,12 +35,24 @@
                                 <a href="{{ path('file_show',{id:file.id}) }}" class="btn btn-sm btn-primary">
                                     <i class="fa fa-eye"></i>
                                 </a>
-                                <a href="{{ path('file_edit',{id:file.id}) }}" class="btn btn-sm btn-warning">
-                                    <i class="fa fa-edit"></i>
+                                <a href="{{ asset('uploads/brochures/' ~ file.brochureFilename) }}" class="btn btn-sm btn-danger">
+                                    PDF
                                 </a>
-                                <a href="{{ path('file_delete',{id:file.id}) }}" class="btn btn-sm btn-danger">
+                                <a href="{{ path('file_delete',{id:file.id}) }}" class="btn btn-sm btn-warning">
                                     <i class="fa fa-trash"></i>
                                 </a>
+                            </td>
+                            <td>
+                                {% if (file.stateFile is null) %}
+                                    <a href="{{ path('file_refuse_accept',{id:file.id,'refuse_accept':'accept'}) }}" class="btn btn-sm btn-success" data-toggle="tooltip" data-placement="bottom" title="Accepter">
+                                        <i class="fas fa-check"></i>
+                                    </a>
+                                    <a href="{{ path('file_refuse_accept',{id:file.id,'refuse_accept':'refus'}) }}" class="btn btn-sm btn-danger" data-toggle="tooltip" data-placement="bottom" title="Refuser">
+                                        <i class="fas fa-times"></i>
+                                    </a>
+                                {% else%}
+                                    Déjà traité
+                                {% endif %}
                             </td>
                         </tr>
                     {% endfor %}

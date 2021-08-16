@@ -12,6 +12,15 @@
                     <h3 class="card-title">
                         {{ myFile.titre }}
                     </h3>
+                    <div>
+                        {% if (myFile.stateFile is null) %}
+                            <p class="btn btn-sm btn-secondary"> En cours .. </p>
+                        {% elseif (myFile.stateFile) %}
+                            <p class="btn btn-sm btn-success"> Accepté </p>
+                        {% else%}
+                            <p class="btn btn-sm btn-danger"> Refusé </p>
+                        {% endif %}
+                    </div>
                 </div>
                 <div class="card-body">
                     <div class="card-text">
