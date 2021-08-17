@@ -28,6 +28,7 @@
                             <th>Titre</th>
                             <th>Description</th>
                             <th>Actions</th>
+                            <th>Etat</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -40,12 +41,24 @@
                                     <a href="{{ path('file_show',{id:file.id}) }}" class="btn btn-sm btn-primary">
                                         <i class="fa fa-eye"></i>
                                     </a>
+                                    <a href="{{ asset('uploads/brochures/' ~ file.brochureFilename) }}" class="btn btn-sm btn-danger">
+                                        PDF
+                                    </a>
                                     <a href="{{ path('file_edit',{id:file.id}) }}" class="btn btn-sm btn-warning">
                                         <i class="fa fa-edit"></i>
                                     </a>
                                     <a href="{{ path('file_delete',{id:file.id}) }}" class="btn btn-sm btn-danger">
                                         <i class="fa fa-trash"></i>
                                     </a>
+                                </td>
+                                <td>
+                                    {% if (file.stateFile is null) %}
+                                        <p class="btn btn-sm btn-secondary col-10"> En cours .. </p>
+                                    {% elseif (file.stateFile) %}
+                                        <p class="btn btn-sm btn-success col-10"> Accepté </p>
+                                    {% else%}
+                                        <p class="btn btn-sm btn-danger col-10"> Refusé </p>
+                                    {% endif %}
                                 </td>
                             </tr>
                         {% endfor %}

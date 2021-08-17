@@ -133,4 +133,21 @@ class FileController extends AbstractController
         return $this->redirectToRoute('file_list');
     }
 
+    /**
+     * @Route("/refuse_accept/file/{id}/{refuse_accept}", name="file_refuse_accept")
+     */
+    public function refuseAccepteFile(File $file, string $refuse_accept)
+    {
+        if($refuse_accept == 'accept')
+            $file->setStateFile(true);
+        elseif ($refuse_accept == 'refus')
+            $file->setStateFile(false);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($file);
+        $entityManager->flush();
+
+        $this->flashMessage->add("success","Le fichier a été traité avec succès !");
+        return $this->redirectToRoute('file_list');
+    }
+
 }

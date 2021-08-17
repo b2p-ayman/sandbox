@@ -48,6 +48,11 @@ class File
      */
     private $brochureFilename;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $stateFile;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -96,6 +101,18 @@ class File
     public function setBrochureFilename(?string $brochureFilename): self
     {
         $this->brochureFilename = $brochureFilename;
+
+        return $this;
+    }
+
+    public function getStateFile(): ?bool
+    {
+        return $this->stateFile;
+    }
+
+    public function setStateFile(?bool $stateFile): self
+    {
+        $this->stateFile = $stateFile;
 
         return $this;
     }
