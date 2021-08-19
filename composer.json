@@ -58,8 +58,7 @@
         "symfony/security-bundle": "5.3.*",
         "symfony/translation": "5.3.*",
         "symfony/validator": "5.3.*",
-        "symfony/yaml": "5.3.*",
-        "ext-bcmath": "*"
+        "symfony/yaml": "5.3.*"
     },
     "config": {
         "optimize-autoloader": true,
