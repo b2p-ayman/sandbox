@@ -17,7 +17,7 @@ class RegistrationController extends AbstractController
 
     public function __construct(FlashBagInterface $flashMessage)
     {
-        $this->flashMessage=$flashMessage;
+        $this->flashMessage = $flashMessage;
     }
 
     /**
@@ -49,7 +49,7 @@ class RegistrationController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            $this->flashMessage->add("success","User added !");
+            $this->flashMessage->add('success', 'User added !');
 
             return $this->redirectToRoute('app_login');
         }

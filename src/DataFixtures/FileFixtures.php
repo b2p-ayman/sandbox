@@ -10,10 +10,10 @@ class FileFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-        for ($i = 1 ; $i <= 10 ; $i++){
+        for ($i = 1; $i <= 10; ++$i) {
             $file = new File();
-            $file->setTitre("File numéro : ".$i);
-            $file->setDescription("Desciption Fil numéro : ".$i);
+            $file->setTitre('File numéro : '.$i);
+            $file->setDescription('Desciption Fil numéro : '.$i);
             $manager->persist($file);
         }
 

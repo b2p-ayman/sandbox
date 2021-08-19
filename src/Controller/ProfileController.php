@@ -14,23 +14,22 @@ class ProfileController extends AbstractController
      */
     public function index(Request $request, PaginatorInterface $paginator)
     {
-        if (!$this->getUser()) {
+        $user = $this->getUser();
+        if (!$user) {
             return $this->redirectToRoute('file_list');
         }
-
-        $user = $this->getUser();
         $files = $user->getFiles();
 
         //// La pagination
         $files = $paginator->paginate(
             $files, /* query NOT result */
-            $request->query->getInt('page', 1)/*page number*/,
+            $request->query->getInt('page', 1)/*page number*/ ,
             5/*limit per page*/
         );
 
         return $this->render('profile/index.html.twig', [
             'user' => $user,
-            'userFiles' => $files
+            'userFiles' => $files,
         ]);
     }
 }

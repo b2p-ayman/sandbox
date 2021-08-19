@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Form\Type;
 
 use App\Entity\File;
@@ -36,7 +37,7 @@ class FileType extends AbstractType
                             'application/x-pdf',
                         ],
                         'mimeTypesMessage' => 'Veuillez télécharger un document PDF valide',
-                    ])
+                    ]),
                 ],
             ])
             ->add('valider', SubmitType::class)
@@ -49,5 +50,4 @@ class FileType extends AbstractType
             'data_class' => File::class,
         ]);
     }
-
 }

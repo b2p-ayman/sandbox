@@ -1,20 +1,19 @@
 <?php
 
-
 namespace App\Controller;
-
 
 use App\Entity\File;
 use App\Form\Type\FileType;
 use App\Repository\FileRepository;
 use App\Service\FileUploader;
+use Knp\Component\Pager\PaginatorInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Knp\Component\Pager\PaginatorInterface;
 
 class FileController extends AbstractController
 {
@@ -38,12 +37,12 @@ class FileController extends AbstractController
         //// La pagination
         $files = $paginator->paginate(
             $files, /* query NOT result */
-            $request->query->getInt('page', 1)/*page number*/,
+            $request->query->getInt('page', 1)/*page number*/ ,
             5/*limit per page*/
         );
 
-        return $this->render('home.html.twig',[
-            "myFiles" => $files
+        return $this->render('home.html.twig', [
+            'myFiles' => $files,
         ]);
     }
 
@@ -55,28 +54,25 @@ class FileController extends AbstractController
         $file = $this->fileRepository
             ->find($id);
 
-        return $this->render('show.html.twig',[
-            "myFile" => $file
+        return $this->render('show.html.twig', [
+            'myFile' => $file,
         ]);
     }
 
     /**
      * @Route("/create/file", name="file_create")
      */
-    public function createFile(Request $request, FileUploader $fileUploader) : Response
+    public function createFile(Request $request, FileUploader $fileUploader): Response
     {
         $file = new File();
         $form = $this->createForm(FileType::class, $file);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()){
-
+        if ($form->isSubmitted() && $form->isValid()) {
             /** @var UploadedFile $brochureFile */
             $brochureFile = $form->get('brochure')->getData();
-            if ($brochureFile) {
-                $brochureFileName = $fileUploader->upload($brochureFile);
-                $file->setBrochureFilename($brochureFileName);
-            }
+            $brochureFileName = $fileUploader->upload($brochureFile);
+            $file->setBrochureFilename($brochureFileName);
 
             $file = $form->getData();
             $user = $this->getUser();
@@ -85,7 +81,8 @@ class FileController extends AbstractController
             $entityManager->persist($file);
             $entityManager->flush();
 
-            $this->flashMessage->add("success","Fichier ajouté !");
+            $this->flashMessage->add('success', 'Fichier ajouté !');
+
             return $this->redirectToRoute('file_list');
         }
 
@@ -97,18 +94,19 @@ class FileController extends AbstractController
     /**
      * @Route("/edit/file/{id}", name="file_edit")
      */
-    public function modifyFile(File $file, Request $request) : Response
+    public function modifyFile(File $file, Request $request): Response
     {
         $form = $this->createForm(FileType::class, $file);
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()){
+        if ($form->isSubmitted() && $form->isValid()) {
             $file = $form->getData();
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($file);
             $entityManager->flush();
 
-            $this->flashMessage->add("success","Fichier modifié !");
+            $this->flashMessage->add('success', 'Fichier modifié !');
+
             return $this->redirectToRoute('file_list');
         }
 
@@ -123,13 +121,14 @@ class FileController extends AbstractController
     public function deleteFile(File $file)
     {
         //$file = $this->fileRepository->find($id); // we can pass juste File $file as argument, symfony will understand
-            // and search for the file with the $id
+        // and search for the file with the $id
 
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->remove($file);
         $entityManager->flush();
 
-        $this->flashMessage->add("success","Fichier supprimé !");
+        $this->flashMessage->add('success', 'Fichier supprimé !');
+
         return $this->redirectToRoute('file_list');
     }
 
@@ -138,16 +137,17 @@ class FileController extends AbstractController
      */
     public function refuseAccepteFile(File $file, string $refuse_accept)
     {
-        if($refuse_accept == 'accept')
+        if ('accept' === $refuse_accept) {
             $file->setStateFile(true);
-        elseif ($refuse_accept == 'refus')
+        } elseif ('refus' === $refuse_accept) {
             $file->setStateFile(false);
+        }
         $entityManager = $this->getDoctrine()->getManager();
         $entityManager->persist($file);
         $entityManager->flush();
 
-        $this->flashMessage->add("success","Le fichier a été traité avec succès !");
+        $this->flashMessage->add('success', 'Le fichier a été traité avec succès !');
+
         return $this->redirectToRoute('file_list');
     }
-
 }
