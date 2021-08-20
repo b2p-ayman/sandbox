@@ -1,5 +1,7 @@
 # My SF5 tests project
 
+[![codecov](https://codecov.io/gh/b2p-ayman/sandbox/branch/develop/graph/badge.svg?token=PIBH2BXN49)](https://codecov.io/gh/b2p-ayman/sandbox)
+
 ## De la documentation
 
 Plusieurs sujets : 
