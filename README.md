@@ -1,5 +1,7 @@
 # My SF5 tests project
 
+![Symfony workflow](https://github.com/b2p-ayman/sandbox/actions/workflows/symfony.yml/badge.svg)
+
 [![codecov](https://codecov.io/gh/b2p-ayman/sandbox/branch/develop/graph/badge.svg?token=PIBH2BXN49)](https://codecov.io/gh/b2p-ayman/sandbox)
 
 ## De la documentation
