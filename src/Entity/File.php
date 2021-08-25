@@ -2,11 +2,16 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use App\Repository\FileRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
+ * @ApiResource(formats={"json"})
+ * @ApiFilter(SearchFilter::class, properties={"id": "exact","titre": "ipartial"})
  * @ORM\Entity(repositoryClass=FileRepository::class)
  */
 class File
