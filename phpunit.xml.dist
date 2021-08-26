@@ -25,6 +25,9 @@
         <testsuite name="Unit tests">
             <directory>tests/Unit</directory>
         </testsuite>
+        <testsuite name="Func tests">
+            <directory>tests/Func</directory>
+        </testsuite>
         <testsuite name="App tests">
             <directory>tests/App</directory>
         </testsuite>
