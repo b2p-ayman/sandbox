@@ -2,8 +2,8 @@
 
 namespace App\Tests\Func\Entity;
 
+use App\Tests\Utils\AbstractEndPoint;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 
 class FileTest extends AbstractEndPoint
 {
@@ -16,7 +16,8 @@ class FileTest extends AbstractEndPoint
         $responseContent = $response->getContent();
         $responseDecoded = json_decode($responseContent);
 
-        self::assertEquals(Response::HTTP_OK, $response->getStatusCode());
+        //self::assertEquals(Response::HTTP_OK, $response->getStatusCode());
+        self::assertResponseIsSuccessful();
         self::assertJson($responseContent);
         self::assertNotEmpty($responseDecoded);
     }
