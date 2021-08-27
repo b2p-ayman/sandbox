@@ -23,28 +23,19 @@ class UserTest extends TestCase
 
     public function testGetEmail(): void
     {
-        $value = 'ayman@email.com';
-        $response = $this->user->setEmail($value);
-
-        $this->assertInstanceOf(User::class, $response);
-        $this->assertEquals($value, $this->user->getEmail());
+        $this->assertInstanceOf(User::class, $this->user->setEmail('ayman@email.com'));
+        $this->assertEquals('ayman@email.com', $this->user->getEmail());
     }
 
     public function testGetUsername(): void
     {
-        $value = 'Ayman';
-        $response = $this->user->setUsername($value);
-
-        $this->assertInstanceOf(User::class, $response);
-        $this->assertEquals($value, $this->user->getUsername());
+        $this->assertInstanceOf(User::class, $this->user->setUsername('Ayman'));
+        $this->assertEquals('Ayman', $this->user->getUsername());
     }
 
     public function testGetRoles(): void
     {
-        $value = ['A', 'B'];
-        $response = $this->user->setRoles($value);
-
-        $this->assertInstanceOf(User::class, $response);
+        $this->assertInstanceOf(User::class, $this->user->setRoles(['A', 'B']));
         $this->assertEquals(['A', 'B', 'ROLE_USER'], $this->user->getRoles());
     }
 
@@ -54,7 +45,6 @@ class UserTest extends TestCase
         $value2 = new File();
         $value3 = new File();
 
-        //$response = $this->user->addFile($value);
         $this->user->addFile($value);
         $this->user->addFile($value2);
         $this->user->addFile($value3);
