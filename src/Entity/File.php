@@ -7,11 +7,44 @@ use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use App\Repository\FileRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
+use App\Controller\FileUpdateTitle;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\NumericFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\RangeFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\ExistsFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 
 /**
- * @ApiResource(formats={"json"})
+ * @ApiResource(
+ *     formats={"json"},
+ *     collectionOperations={
+ *          "get"={
+ *              "normalization_context"={"groups"={"file_read"}}
+ *          },
+ *          "post"
+ *     },
+ *     itemOperations={
+ *         "get"={
+ *             "normalization_context"={"groups"={"file_details_read"}}
+ *         },
+ *         "put",
+ *         "patch",
+ *         "delete",
+ *          "put_update_title"={
+ *              "method"="PUT",
+ *              "path"="/files/{id}/update-title",
+ *              "controller"=FileUpdateTitle::class,
+ *          }
+ *     }
+ * )
  * @ApiFilter(SearchFilter::class, properties={"id": "exact","titre": "ipartial"})
+ * @ApiFilter(BooleanFilter::class, properties={"stateFile"})
+ * @ApiFilter(NumericFilter::class, properties={"id"})
+ * @ApiFilter(RangeFilter::class, properties={"id"})
+ * @ApiFilter(ExistsFilter::class, properties={"stateFile"})
+ * @ApiFilter(OrderFilter::class, properties={"id"}, arguments={"orderParameterName"="order"})
  * @ORM\Entity(repositoryClass=FileRepository::class)
  */
 class File
@@ -20,6 +53,7 @@ class File
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"file_read", "file_details_read", "user_details_read"})
      */
     private $id;
 
@@ -30,6 +64,7 @@ class File
      *      minMessage = "Le titre doit être au moins de {{ limit }} caractères",
      *      maxMessage = "Le titre doit être au maximum {{ limit }} caractères"
      *      )
+     * @Groups({"file_read", "file_details_read", "user_details_read"})
      */
     private $titre;
 
@@ -39,12 +74,14 @@ class File
      * @Assert\Length(min=10,
      *     minMessage = "La description doit être au moins de {{ limit }} caractères",
      *     )
+     * @Groups({"file_read", "file_details_read", "user_details_read"})
      */
     private $description;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="files")
      * @ORM\JoinColumn(nullable=false)
+     * @Groups({"file_details_read"})
      */
     private $user;
 
@@ -55,6 +92,7 @@ class File
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
+     * @Groups({"file_read", "file_details_read", "user_details_read"})
      */
     private $stateFile;
 

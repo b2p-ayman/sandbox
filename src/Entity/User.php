@@ -12,9 +12,26 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 /**
- * @ApiResource(formats={"json"})
+ * @ApiResource(
+ *     formats={"json"},
+ *     collectionOperations={
+ *          "get"={
+ *              "normalization_context"={"groups"={"user_read"}}
+ *          },
+ *          "post"
+ *     },
+ *     itemOperations={
+ *         "get"={
+ *             "normalization_context"={"groups"={"user_details_read"}}
+ *         },
+ *         "put",
+ *         "patch",
+ *         "delete"
+ *     }
+ * )
  * @ApiFilter(SearchFilter::class, properties={"id": "exact","username":"ipartial"})
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
@@ -25,11 +42,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @Groups({"user_read", "user_details_read", "file_details_read"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Groups({"user_read","user_details_read", "file_details_read"})
      */
     private $email;
 
@@ -46,11 +65,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\OneToMany(targetEntity=File::class, mappedBy="user")
+     * @Groups({"user_details_read"})
      */
     private $files;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups({"user_read","user_details_read", "file_details_read"})
      */
     private $username;
 
