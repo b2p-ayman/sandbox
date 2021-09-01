@@ -8,9 +8,37 @@ use Symfony\Component\HttpFoundation\Response;
 
 class FileTest extends AbstractEndPoint
 {
+    public function testGetFileById(): void
+    {
+        $response = $this->getResponseFromRequest(Request::METHOD_GET, '/api/files/40');
+        $responseContent = $response->getContent();
+        $responseDecoded = json_decode($responseContent);
+
+        self::assertResponseIsSuccessful();
+        self::assertJson($responseContent);
+        self::assertNotEmpty($responseDecoded);
+    }
+
     public function testGetFiles(): void
     {
         $response = $this->getResponseFromRequest(Request::METHOD_GET, '/api/files');
+        $responseContent = $response->getContent();
+        $responseDecoded = json_decode($responseContent);
+
+        self::assertResponseIsSuccessful();
+        self::assertJson($responseContent);
+        self::assertNotEmpty($responseDecoded);
+    }
+
+    public function testPutFile(): void
+    {
+        $filePayload = '{"titre" : "test titre", "description":"test description","user":"/api/users/3"}';
+
+        $response = $this->getResponseFromRequest(
+            Request::METHOD_PUT,
+            '/api/files/40',
+            $filePayload
+        );
         $responseContent = $response->getContent();
         $responseDecoded = json_decode($responseContent);
 
@@ -47,7 +75,6 @@ class FileTest extends AbstractEndPoint
         );
         $responseContent = $response->getContent();
         $responseDecoded = json_decode($responseContent);
-        //dd($responseContent);
 
         self::assertResponseIsSuccessful();
         self::assertJson($responseContent);
