@@ -20,9 +20,9 @@ class UserTest extends AbstractEndPoint
         self::assertNotEmpty($responseDecoded);
     }
 
-    public function testGetFiles(): void
+    public function testGetUserById(): void
     {
-        $response = $this->getResponseFromRequest(Request::METHOD_GET, '/api/files');
+        $response = $this->getResponseFromRequest(Request::METHOD_GET, '/api/users/3');
         $responseContent = $response->getContent();
         $responseDecoded = json_decode($responseContent);
 
@@ -46,19 +46,17 @@ class UserTest extends AbstractEndPoint
         self::assertNotEmpty($responseDecoded);
     }
 
-    public function testPostFile(): void
+    public function testPutUser(): void
     {
-        $filePayload = '{"titre" : "test titre", "description":"test description","user":"/api/users/3"}';
-
         $response = $this->getResponseFromRequest(
-            Request::METHOD_POST,
-            '/api/files',
-            $filePayload
+            Request::METHOD_PUT,
+            '/api/users/4',
+            $this->getPayload()
         );
         $responseContent = $response->getContent();
         $responseDecoded = json_decode($responseContent);
 
-        self::assertEquals(Response::HTTP_CREATED, $response->getStatusCode());
+        self::assertResponseIsSuccessful();
         self::assertJson($responseContent);
         self::assertNotEmpty($responseDecoded);
     }

@@ -27,6 +27,12 @@ class UserTest extends TestCase
         $this->assertEquals('ayman@email.com', $this->user->getEmail());
     }
 
+    public function testGetUserIdentifier(): void
+    {
+        $this->assertInstanceOf(User::class, $this->user->setEmail('ayman@email.com'));
+        $this->assertEquals('ayman@email.com', $this->user->getUserIdentifier());
+    }
+
     public function testGetUsername(): void
     {
         $this->assertInstanceOf(User::class, $this->user->setUsername('Ayman'));
@@ -37,6 +43,12 @@ class UserTest extends TestCase
     {
         $this->assertInstanceOf(User::class, $this->user->setRoles(['A', 'B']));
         $this->assertEquals(['A', 'B', 'ROLE_USER'], $this->user->getRoles());
+    }
+
+    public function testGetPassword(): void
+    {
+        $this->assertInstanceOf(User::class, $this->user->setPassword('password'));
+        $this->assertEquals('password', $this->user->getPassword());
     }
 
     public function testGetFiles(): void
