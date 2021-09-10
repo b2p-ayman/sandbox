@@ -8,8 +8,8 @@ services:
       context: docker/php-fpm
       args:
         - TAG_PHP=${TAG_PHP}
-    image: ${PROJECT}_php:${PROJECT_VERSION}-${PROJECT_API_VERSION}
-    container_name: ${PROJECT}_php-fpm
+    image: ${IMAGE_NAME:-test:beta}
+    container_name: ${CONTAINER_NAME:-test}
     restart: unless-stopped
     ports:
       - "8000:8000"
