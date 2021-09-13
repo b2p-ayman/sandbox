@@ -8,3 +8,8 @@ index:
 app_logout:
     path: /logout
     methods: GET
+
+# JWT login check
+login_check:
+    path: /api/login_check
+    methods: ['POST']
