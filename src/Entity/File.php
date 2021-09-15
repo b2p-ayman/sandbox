@@ -96,6 +96,15 @@ class File
      */
     private $stateFile;
 
+    /**
+     * @var MediaObject|null
+     *
+     * @ORM\ManyToOne(targetEntity=MediaObject::class)
+     * @ORM\JoinColumn(nullable=true)
+     * @Groups({"file_read", "file_details_read", "user_details_read"})
+     */
+    public $document;
+
     public function getId(): ?int
     {
         return $this->id;
