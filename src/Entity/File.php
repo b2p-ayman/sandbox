@@ -37,7 +37,8 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
  *              "path"="/files/{id}/update-title",
  *              "controller"=FileUpdateTitle::class,
  *          }
- *     }
+ *     },
+ *     attributes={"pagination_items_per_page"=7}
  * )
  * @ApiFilter(SearchFilter::class, properties={"id": "exact","titre": "ipartial"})
  * @ApiFilter(BooleanFilter::class, properties={"stateFile"})
