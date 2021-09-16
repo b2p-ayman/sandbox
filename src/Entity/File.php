@@ -37,7 +37,8 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
  *              "path"="/files/{id}/update-title",
  *              "controller"=FileUpdateTitle::class,
  *          }
- *     }
+ *     },
+ *     attributes={"pagination_items_per_page"=7}
  * )
  * @ApiFilter(SearchFilter::class, properties={"id": "exact","titre": "ipartial"})
  * @ApiFilter(BooleanFilter::class, properties={"stateFile"})
@@ -95,6 +96,15 @@ class File
      * @Groups({"file_read", "file_details_read", "user_details_read"})
      */
     private $stateFile;
+
+    /**
+     * @var MediaObject|null
+     *
+     * @ORM\ManyToOne(targetEntity=MediaObject::class)
+     * @ORM\JoinColumn(nullable=true)
+     * @Groups({"file_read", "file_details_read", "user_details_read"})
+     */
+    public $document;
 
     public function getId(): ?int
     {
