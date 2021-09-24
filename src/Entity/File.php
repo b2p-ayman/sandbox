@@ -6,6 +6,9 @@ use ApiPlatform\Core\Annotation\ApiFilter;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use App\Repository\FileRepository;
+use App\Utils\Timestampable;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -50,6 +53,8 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
  */
 class File
 {
+    use Timestampable;
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -105,6 +110,43 @@ class File
      * @Groups({"file_read", "file_details_read", "user_details_read"})
      */
     public $document;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $language;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $type;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $version;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=HistoriqueConsultation::class, mappedBy="document")
+     */
+    private $historiqueConsultations;
+
+    /**
+     * @ORM\OneToMany(targetEntity=HistoriqueEnvoi::class, mappedBy="document")
+     */
+    private $historiqueEnvois;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Site::class, inversedBy="files")
+     */
+    private $site;
+
+    public function __construct()
+    {
+        $this->historiqueConsultations = new ArrayCollection();
+        $this->historiqueEnvois = new ArrayCollection();
+        $this->createdAt = new \DateTimeImmutable();
+    }
 
     public function getId(): ?int
     {
@@ -167,6 +209,111 @@ class File
     public function setStateFile(?bool $stateFile): self
     {
         $this->stateFile = $stateFile;
+
+        return $this;
+    }
+
+    public function getLanguage(): ?string
+    {
+        return $this->language;
+    }
+
+    public function setLanguage(?string $language): self
+    {
+        $this->language = $language;
+
+        return $this;
+    }
+
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    public function setType(?string $type): self
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    public function getVersion(): ?int
+    {
+        return $this->version;
+    }
+
+    public function setVersion(?int $version): self
+    {
+        $this->version = $version;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|HistoriqueConsultation[]
+     */
+    public function getHistoriqueConsultations(): Collection
+    {
+        return $this->historiqueConsultations;
+    }
+
+    public function addHistoriqueConsultation(HistoriqueConsultation $historiqueConsultation): self
+    {
+        if (!$this->historiqueConsultations->contains($historiqueConsultation)) {
+            $this->historiqueConsultations[] = $historiqueConsultation;
+            $historiqueConsultation->addDocument($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHistoriqueConsultation(HistoriqueConsultation $historiqueConsultation): self
+    {
+        if ($this->historiqueConsultations->removeElement($historiqueConsultation)) {
+            $historiqueConsultation->removeDocument($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|HistoriqueEnvoi[]
+     */
+    public function getHistoriqueEnvois(): Collection
+    {
+        return $this->historiqueEnvois;
+    }
+
+    public function addHistoriqueEnvoi(HistoriqueEnvoi $historiqueEnvoi): self
+    {
+        if (!$this->historiqueEnvois->contains($historiqueEnvoi)) {
+            $this->historiqueEnvois[] = $historiqueEnvoi;
+            $historiqueEnvoi->setDocument($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHistoriqueEnvoi(HistoriqueEnvoi $historiqueEnvoi): self
+    {
+        if ($this->historiqueEnvois->removeElement($historiqueEnvoi)) {
+            // set the owning side to null (unless already changed)
+            if ($historiqueEnvoi->getDocument() === $this) {
+                $historiqueEnvoi->setDocument(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getSite(): ?Site
+    {
+        return $this->site;
+    }
+
+    public function setSite(?Site $site): self
+    {
+        $this->site = $site;
 
         return $this;
     }

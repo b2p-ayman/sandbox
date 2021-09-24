@@ -1,0 +1,27 @@
+App\Entity\File:
+  file_1:
+    titre: 'pds-1'
+    description: 'description pds-1'
+    user: "@user_1"
+    document: '@mediaObject_1'
+    language: "fr-fr"
+    type: 'main'
+    site: '@site_1'
+
+  file_2:
+    titre: 'pds-2'
+    description: 'description pds-2'
+    user: "@user_1"
+    document: '@mediaObject_1'
+    language: "fr-fr"
+    type: 'main'
+    site: '@site_1'
+
+  file_{3..20}:
+    titre: document-<current()>
+    description: <sentences(3, true)>
+    user: '@user_1'
+    document: '@mediaObject_1'
+    language: <randomElement(['fr-fr', 'en-gb', 'es-es', 'de-de', 'it-it', '', 'all'])>
+    type: 'main'
+    site: '@site_<numberBetween(1, 20)>'

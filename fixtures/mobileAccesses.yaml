@@ -1,0 +1,22 @@
+App\Entity\MobileAccess:
+  mobileAccess_1:
+    nom: Simon
+    prenom: Emon
+    password: LmTh3B0ss!
+    langue: 'fr-FR'
+    contact: '@contact_1'
+
+  mobileAccess_2:
+    nom: Noah
+    prenom: Eric
+    password: MPmT0sKMss!
+    langue: 'fr-FR'
+    contact: '@contact_1'
+
+  mobileAccess_{3..10}:
+    nom: <lastName()>
+    prenom: <firstName()>
+    identifiant: Visitor<current()>
+    password: aPass
+    langue: <randomElement(['fr', 'fr-fr', 'en-gb', 'es-es', 'de-de', 'it-it', ''])>
+    contact: '@contact_<numberBetween(1, 20)>'

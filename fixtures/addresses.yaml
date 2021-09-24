@@ -1,0 +1,21 @@
+App\Entity\Adresse:
+  address_1:
+    numero: 5
+    rue: "La Boétie"
+    code_postal: "75015"
+    ville: "Paris"
+    pays: "France"
+
+  address_2:
+    numero: 92
+    rue: "Banaudon"
+    code_postal: "69009"
+    ville: "Lyon"
+    pays: "France"
+
+  address_{3..20}:
+    numero: '<buildingNumber()>'
+    rue: '<streetName()>'
+    code_postal: '<postcode()>'
+    ville: '<city()>'
+    pays: 'France'

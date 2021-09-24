@@ -1,0 +1,24 @@
+App\Entity\Contact:
+  contact_1:
+    prenom: Mark
+    nom: Dell
+    type: responsible
+    email: great.chief@the-world.com
+
+  contact_2:
+    prenom: Small
+    nom: Chief
+    type: simple
+    email: small.chief@the-world.com
+
+  contact_3:
+    prenom: Firemen
+    nom: Chief
+    type: emergency
+    email: firemen.chief@the-world.com
+
+  contact_{4..20}:
+    prenom: <firstName()>
+    nom: <lastName()>
+    type: visitor
+    email: visitor.<current()>\@the-world.com

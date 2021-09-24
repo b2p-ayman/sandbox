@@ -1,0 +1,18 @@
+App\Entity\User:
+  user_1:
+    email: "bbb@bbb.bbb"
+    roles: [ 'ROLE_USER' ]
+    password: "aaa"
+    username: "bbb@bbb.bbb"
+
+  user_2:
+    email: "aaa@aaa.aaa"
+    roles: [ 'ROLE_USER' ]
+    password: "aaa"
+    username: "Ayman"
+
+  user_{3..10}:
+    email (unique): <safeEmail()>
+    roles: [ 'ROLE_USER' ]
+    password: "aaa"
+    username: '<username()>'
