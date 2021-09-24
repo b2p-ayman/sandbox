@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20210922154951 extends AbstractMigration
+final class Version20210924021727 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -29,7 +29,7 @@ final class Version20210922154951 extends AbstractMigration
         $this->addSql('CREATE TABLE historique_envoi (id INT AUTO_INCREMENT NOT NULL, document_id INT DEFAULT NULL, expediteur_id INT DEFAULT NULL, destinataire_id INT DEFAULT NULL, status VARCHAR(255) DEFAULT NULL, INDEX IDX_84FEEF15C33F7837 (document_id), INDEX IDX_84FEEF1510335F61 (expediteur_id), INDEX IDX_84FEEF15A4F84F6E (destinataire_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE media_object (id INT AUTO_INCREMENT NOT NULL, file_path VARCHAR(255) DEFAULT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE mobile_access (id INT AUTO_INCREMENT NOT NULL, contact_id INT NOT NULL, nom VARCHAR(255) NOT NULL, prenom VARCHAR(255) NOT NULL, identifiant VARCHAR(255) DEFAULT NULL, password VARCHAR(255) NOT NULL, langue VARCHAR(255) DEFAULT NULL, created_at DATETIME NOT NULL, updated_at DATETIME DEFAULT NULL, INDEX IDX_794DC05EE7A1254A (contact_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-        $this->addSql('CREATE TABLE site (id INT AUTO_INCREMENT NOT NULL, adresse_principale_id INT DEFAULT NULL, adresse_acces_conducteur_id INT DEFAULT NULL, type VARCHAR(255) DEFAULT NULL, coord_gps VARCHAR(255) DEFAULT NULL, created_at DATETIME NOT NULL, updated_at DATETIME DEFAULT NULL, UNIQUE INDEX UNIQ_694309E4C87159FC (adresse_principale_id), UNIQUE INDEX UNIQ_694309E457D026D5 (adresse_acces_conducteur_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+        $this->addSql('CREATE TABLE site (id INT AUTO_INCREMENT NOT NULL, adresse_principale_id INT DEFAULT NULL, adresse_acces_conducteur_id INT DEFAULT NULL, type VARCHAR(255) DEFAULT NULL, coord_gps VARCHAR(255) DEFAULT NULL, name VARCHAR(255) DEFAULT NULL, created_at DATETIME NOT NULL, updated_at DATETIME DEFAULT NULL, UNIQUE INDEX UNIQ_694309E4C87159FC (adresse_principale_id), UNIQUE INDEX UNIQ_694309E457D026D5 (adresse_acces_conducteur_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE site_contact (site_id INT NOT NULL, contact_id INT NOT NULL, INDEX IDX_B7C604F3F6BD1646 (site_id), INDEX IDX_B7C604F3E7A1254A (contact_id), PRIMARY KEY(site_id, contact_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('CREATE TABLE user (id INT AUTO_INCREMENT NOT NULL, contact_id INT DEFAULT NULL, email VARCHAR(180) NOT NULL, roles LONGTEXT NOT NULL COMMENT \'(DC2Type:json)\', password VARCHAR(255) NOT NULL, username VARCHAR(255) NOT NULL, UNIQUE INDEX UNIQ_8D93D649E7927C74 (email), UNIQUE INDEX UNIQ_8D93D649E7A1254A (contact_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
         $this->addSql('ALTER TABLE contact ADD CONSTRAINT FK_4C62E638217C0A1D FOREIGN KEY (site_responsible_id) REFERENCES site (id)');

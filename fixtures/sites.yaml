@@ -1,0 +1,17 @@
+App\Entity\Site:
+  site_1:
+    name: "Site chargeur 1"
+    adressePrincipale: "@address_1"
+    adresseAccesConducteur: "@address_2"
+    type: "test Type"
+    coordGPS: "1113333"
+
+  site_2:
+    name: "Site chargeur 2"
+    adressePrincipale: "@address_2"
+    adresseAccesConducteur: "@address_3"
+    type: "test Type"
+    coordGPS: "1133338"
+
+  site_{3..20}:
+    name: Site <current()>

@@ -10,10 +10,10 @@ class FileTest extends AbstractEndPoint
 {
     public function testGetFileById(): void
     {
-        $response = $this->getResponseFromRequest(Request::METHOD_GET, '/api/files/40');
+        $response = $this->getResponseFromRequest(Request::METHOD_GET, '/api/files/20');
         $responseContent = $response->getContent();
         $responseDecoded = json_decode($responseContent);
-
+        //dd($responseDecoded);
         self::assertResponseIsSuccessful();
         self::assertJson($responseContent);
         self::assertNotEmpty($responseDecoded);
@@ -32,11 +32,11 @@ class FileTest extends AbstractEndPoint
 
     public function testPutFile(): void
     {
-        $filePayload = '{"titre" : "test titre", "description":"test description","user":"/api/users/3"}';
+        $filePayload = '{"titre" : "test titre", "description":"test description","user":"/api/users/1"}';
 
         $response = $this->getResponseFromRequest(
             Request::METHOD_PUT,
-            '/api/files/40',
+            '/api/files/20',
             $filePayload
         );
         $responseContent = $response->getContent();
@@ -49,7 +49,7 @@ class FileTest extends AbstractEndPoint
 
     public function testPostFile(): void
     {
-        $filePayload = '{"titre" : "test titre", "description":"test description","user":"/api/users/3"}';
+        $filePayload = '{"titre" : "test titre", "description":"test description","user":"/api/users/1"}';
 
         $response = $this->getResponseFromRequest(
             Request::METHOD_POST,
@@ -66,11 +66,11 @@ class FileTest extends AbstractEndPoint
 
     public function testUpdateTitle(): void
     {
-        $filePayload = '{"titre" : "new title test", "description":"test description","user":"/api/users/3"}';
+        $filePayload = '{"titre" : "new title test", "description":"test description","user":"/api/users/1"}';
 
         $response = $this->getResponseFromRequest(
             Request::METHOD_PUT,
-            '/api/files/40/update-title',
+            '/api/files/20/update-title',
             $filePayload
         );
         $responseContent = $response->getContent();

@@ -236,12 +236,12 @@ class Contact
     public function setUser(?User $user): self
     {
         // unset the owning side of the relation if necessary
-        if ($user === null && $this->user !== null) {
+        if (null === $user && null !== $this->user) {
             $this->user->setContact(null);
         }
 
         // set the owning side of the relation if necessary
-        if ($user !== null && $user->getContact() !== $this) {
+        if (null !== $user && $user->getContact() !== $this) {
             $user->setContact($this);
         }
 

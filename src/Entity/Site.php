@@ -58,6 +58,11 @@ class Site
      */
     private $contacts;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $name;
+
     public function __construct()
     {
         $this->files = new ArrayCollection();
@@ -199,6 +204,18 @@ class Site
                 $contact->setSiteResponsible(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(?string $name): self
+    {
+        $this->name = $name;
 
         return $this;
     }
