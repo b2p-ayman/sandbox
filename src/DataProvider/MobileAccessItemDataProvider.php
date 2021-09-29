@@ -33,10 +33,7 @@ final class MobileAccessItemDataProvider implements ItemDataProviderInterface, R
 
     /**
      * @param array<string, mixed> $context
-     *
      * @throws InvalidIdentifierException
-     *
-     * @phpstan-ignore-next-line
      */
     public function getItem(string $resourceClass, $id, string $operationName = null, array $context = []): ?MobileAccess
     {
