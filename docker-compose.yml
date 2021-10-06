@@ -110,6 +110,14 @@ services:
     networks:
       - dev
 
+  # Redis
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    networks:
+      - dev
+
   # Front UI web server
   nginx-ui:
     build:

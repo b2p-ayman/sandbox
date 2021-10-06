@@ -65,6 +65,9 @@ RUN chown -R www-data:www-data /var/www
 RUN mkdir -p /var/www/.composer
 RUN chown -R www-data:www-data /var/www/.composer
 
+# Redis
+RUN pecl install redis && docker-php-ext-enable redis
+
 WORKDIR /var/www/
 
 USER www-data
