@@ -12,5 +12,14 @@ final class GreetingHandler implements MessageHandlerInterface
     public function __invoke(Greeting $greeting)
     {
         // business logic
+        /*$greeting->user = 'theUser';
+        $greeting->message = 'theMessage';
+        $greeting->document = 'theDoc';
+
+        return $greeting;*/
+
+        //echo 'Sending email now ...';
+
+        sleep(5);
     }
 }

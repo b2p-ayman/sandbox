@@ -68,6 +68,10 @@ RUN chown -R www-data:www-data /var/www/.composer
 # Redis
 RUN pecl install redis && docker-php-ext-enable redis
 
+# AMQP
+RUN apt-get install -y librabbitmq-dev && pecl install amqp && docker-php-ext-enable amqp
+
+
 WORKDIR /var/www/
 
 USER www-data

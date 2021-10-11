@@ -14,22 +14,35 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     itemOperations={}
  *     )
  */
-
 class Greeting
 {
     /**
+     * @var int
+     */
+    private $notifId;
+
+    /**
      * @Assert\NotBlank
      */
-
     public ?string $message = 'Default Message';
 
     /**
      * @Assert\NotBlank
      */
-    public $user;
+    public ?string $user = 'Default User';
 
     /**
      * @Assert\NotBlank
      */
-    public $document;
+    public ?string $document = 'Default Doc';
+
+    public function __construct(int $notifId)
+    {
+        $this->notifId = $notifId;
+    }
+
+    public function getNotifId(): int
+    {
+        return $this->notifId;
+    }
 }
