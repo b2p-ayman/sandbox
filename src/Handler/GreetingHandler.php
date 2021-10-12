@@ -16,10 +16,10 @@ final class GreetingHandler implements MessageHandlerInterface
         $greeting->message = 'theMessage';
         $greeting->document = 'theDoc';
 
-        return $greeting;*/
+        return $greeting;
+        */
+        echo 'I passed from the GreetingHandler';
 
-        //echo 'Sending email now ...';
-
-        sleep(5);
+        //sleep(5);
     }
 }
