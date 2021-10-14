@@ -8,7 +8,23 @@ use App\Utils\Timestampable;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ApiResource()
+ * @ApiResource(
+ *     formats={"json"},
+ *     collectionOperations={
+ *          "get"={
+ *              "normalization_context"={"groups"={"adresse_read"}}
+ *          },
+ *          "post"
+ *     },
+ *     itemOperations={
+ *         "get"={
+ *             "normalization_context"={"groups"={"adresse_details_read"}}
+ *         },
+ *         "put",
+ *         "patch",
+ *         "delete"
+ *     }
+ * )
  * @ORM\Entity(repositoryClass=AdresseRepository::class)
  */
 class Adresse
@@ -46,16 +62,6 @@ class Adresse
      * @ORM\Column(type="string", length=255)
      */
     private $pays;
-
-    /**
-     * @ORM\OneToOne(targetEntity=Site::class, mappedBy="adressePrincipale", cascade={"persist", "remove"})
-     */
-    private $site;
-
-    /**
-     * @ORM\OneToOne(targetEntity=Site::class, mappedBy="adresseAccesConducteur", cascade={"persist", "remove"})
-     */
-    private $site2;
 
     public function __construct()
     {
@@ -123,50 +129,6 @@ class Adresse
     public function setPays(?string $pays): self
     {
         $this->pays = $pays;
-
-        return $this;
-    }
-
-    public function getSite(): ?Site
-    {
-        return $this->site;
-    }
-
-    public function setSite(?Site $site): self
-    {
-        // unset the owning side of the relation if necessary
-        if (null === $site && null !== $this->site) {
-            $this->site->setAdressePrincipale(null);
-        }
-
-        // set the owning side of the relation if necessary
-        if (null !== $site && $site->getAdressePrincipale() !== $this) {
-            $site->setAdressePrincipale($this);
-        }
-
-        $this->site = $site;
-
-        return $this;
-    }
-
-    public function getSite2(): ?Site
-    {
-        return $this->site2;
-    }
-
-    public function setSite2(?Site $site2): self
-    {
-        // unset the owning side of the relation if necessary
-        if (null === $site2 && null !== $this->site2) {
-            $this->site2->setAdresseAccesConducteur(null);
-        }
-
-        // set the owning side of the relation if necessary
-        if (null !== $site2 && $site2->getAdresseAccesConducteur() !== $this) {
-            $site2->setAdresseAccesConducteur($this);
-        }
-
-        $this->site2 = $site2;
 
         return $this;
     }

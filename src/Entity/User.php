@@ -64,26 +64,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $password;
 
     /**
-     * @ORM\OneToMany(targetEntity=File::class, mappedBy="user")
-     * @Groups({"user_details_read"})
-     */
-    private $files;
-
-    /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"user_read","user_details_read", "file_details_read"})
      */
     private $username;
-
-    /**
-     * @ORM\OneToOne(targetEntity=Contact::class, inversedBy="user", cascade={"persist", "remove"})
-     */
-    private $contact;
-
-    public function __construct()
-    {
-        $this->files = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -174,35 +158,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // $this->plainPassword = null;
     }
 
-    /**
-     * @return Collection|File[]
-     */
-    public function getFiles(): Collection
-    {
-        return $this->files;
-    }
-
-    public function addFile(File $file): self
-    {
-        if (!$this->files->contains($file)) {
-            $this->files[] = $file;
-            $file->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeFile(File $file): self
-    {
-        if ($this->files->removeElement($file)) {
-            // set the owning side to null (unless already changed)
-            if ($file->getUser() === $this) {
-                $file->setUser(null);
-            }
-        }
-
-        return $this;
-    }
 
     public function setUsername(string $username): self
     {
@@ -211,15 +166,4 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getContact(): ?Contact
-    {
-        return $this->contact;
-    }
-
-    public function setContact(?Contact $contact): self
-    {
-        $this->contact = $contact;
-
-        return $this;
-    }
 }

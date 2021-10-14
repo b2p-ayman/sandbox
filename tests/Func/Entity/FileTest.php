@@ -10,7 +10,7 @@ class FileTest extends AbstractEndPoint
 {
     public function testGetFileById(): void
     {
-        $response = $this->getResponseFromRequest(Request::METHOD_GET, '/api/files/20');
+        $response = $this->getResponseFromRequest(Request::METHOD_GET, '/api/files/1');
         $responseContent = $response->getContent();
         $responseDecoded = json_decode($responseContent);
         //dd($responseDecoded);
