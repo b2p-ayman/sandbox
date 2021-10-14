@@ -48,6 +48,7 @@ final class ContactItemDataProvider implements ItemDataProviderInterface, Restri
         }
 
         // Deserialize data using the Serializer
-        return $this->getSerializer()->deserialize($file, Contact::class, 'custom');
+        // return $this->getSerializer()->deserialize($file, Adresse::class, 'custom');
+        return $file;
     }
 }

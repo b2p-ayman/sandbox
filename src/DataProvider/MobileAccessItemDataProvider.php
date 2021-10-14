@@ -48,6 +48,7 @@ final class MobileAccessItemDataProvider implements ItemDataProviderInterface, R
         }
 
         // Deserialize data using the Serializer
-        return $this->getSerializer()->deserialize($file, MobileAccess::class, 'custom');
+        // return $this->getSerializer()->deserialize($file, Adresse::class, 'custom');
+        return $file;
     }
 }

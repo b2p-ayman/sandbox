@@ -48,6 +48,7 @@ final class FileItemDataProvider implements ItemDataProviderInterface, Restricte
         }
 
         // Deserialize data using the Serializer
-        return $this->getSerializer()->deserialize($file, File::class, 'custom');
+        // return $this->getSerializer()->deserialize($file, Adresse::class, 'custom');
+        return $file;
     }
 }
