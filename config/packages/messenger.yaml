@@ -29,7 +29,7 @@ framework:
                     # or pass a different entity manager to any
                     #- doctrine_transaction: ['custom']
 
-                    - 'App\Middleware\MyOwnMiddleware'
+                    #- 'App\Middleware\MyOwnMiddleware'
 
         transports:
             # https://symfony.com/doc/current/messenger.html#transport-configuration
