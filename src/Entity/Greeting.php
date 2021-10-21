@@ -19,7 +19,7 @@ class Greeting
     /**
      * @Assert\NotBlank
      */
-    public ?string $message = 'Default Message';
+    public ?string $message;
 
     /**
      * @Assert\NotBlank

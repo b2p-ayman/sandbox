@@ -29,7 +29,7 @@ framework:
                     # or pass a different entity manager to any
                     #- doctrine_transaction: ['custom']
 
-                    #- 'App\Middleware\MyOwnMiddleware'
+                    - 'App\Middleware\MyOwnMiddleware'
 
         transports:
             # https://symfony.com/doc/current/messenger.html#transport-configuration
@@ -38,6 +38,21 @@ framework:
             # sync: 'sync://'
             async:
                 dsn: "%env(MESSENGER_TRANSPORT_DSN)%"
+                # default configuration
+                #retry_strategy:
+                 #   max_retries: 3
+                    # milliseconds delay
+                  #  delay: 1000
+                    # causes the delay to be higher before each retry
+                    # e.g. 1 second delay, 2 seconds, 4 seconds
+                   # multiplier: 2
+                    #max_delay: 0
+                    # override all of this with a service that
+                    # implements Symfony\Component\Messenger\Retry\RetryStrategyInterface
+                    # service: null
+
+            async_priority_high:
+                dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
                 # default configuration
                 retry_strategy:
                     max_retries: 3
@@ -51,11 +66,14 @@ framework:
                     # implements Symfony\Component\Messenger\Retry\RetryStrategyInterface
                     # service: null
 
+                #options:
+                    #queue_name: high
+
             failed: 'doctrine://default?queue_name=failed'
             # sync: 'sync://'
 
         routing:
             # Route your messages to the transports
             # 'App\Message\YourMessage': async
-            'App\Entity\Greeting': async
+            'App\Entity\Greeting': [async, async_priority_high]
             # 'App\Message\SmsNotification': async

@@ -3,7 +3,6 @@
 namespace App\Middleware;
 
 //use App\Message\Stamp\AnotherStamp;
-use App\Entity\Notification;
 use App\Repository\MediaObjectRepository;
 use App\Repository\UserRepository;
 use Psr\Log\LoggerInterface;
@@ -11,6 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Messenger\Envelope;
 use Symfony\Component\Messenger\Middleware\MiddlewareInterface;
 use Symfony\Component\Messenger\Middleware\StackInterface;
+use Symfony\Component\Messenger\Stamp\HandledStamp;
 use Symfony\Component\Messenger\Stamp\ReceivedStamp;
 
 class MyOwnMiddleware extends AbstractController implements MiddlewareInterface
@@ -34,20 +34,11 @@ class MyOwnMiddleware extends AbstractController implements MiddlewareInterface
         //$envelope = $envelope->with(new AnotherStamp(/* ... */));
         //}
 
-        $this->logger->debug('[ApiKeyAuthenticator] - got a token: '.serialize($envelope->getMessage()));
-
-        $body = ((array) $envelope->getMessage());
-
-        $notification = new Notification();
-        $notification->setBody($body['message']);
-        $notification->setUser($this->userRepository->find($body['user_id']));
-        $notification->setDocument($this->mediaObjectRepository->find($body['document_id']));
-
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->persist($notification);
-        $entityManager->flush();
+        //$this->logger->debug('[ApiKeyAuthenticator] - got a token: '.serialize($envelope->getMessage()));
 
         //echo 'I passed from MyOwnMiddleware';
+
+        //$handledStamp = $envelope->last(HandledStamp::class);
 
         return $stack->next()->handle($envelope, $stack);
     }
