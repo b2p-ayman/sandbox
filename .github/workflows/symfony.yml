@@ -164,7 +164,7 @@ jobs:
           if-no-files-found: error
 
       - name: Upload unit tests code coverage to Codecov
-        uses: codecov/codecov-action@v2
+        uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: ./artifacts/coverage-utils.xml,./artifacts/coverage-unit.xml,./artifacts/coverage-app.xml
